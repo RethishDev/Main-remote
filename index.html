@@ -7,70 +7,101 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-    /* Global Styles */
-    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; scroll-behavior: smooth; }
-    html { scroll-behavior: smooth; }
-    body { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: #fff; }
-    a { text-decoration:none; color: inherit; transition: 0.3s; }
-    ul { list-style:none; }
-    h1, h2, h3, h4 { font-family: 'Orbitron', sans-serif; }
-    .container { width:90%; max-width:1200px; margin:auto; }
+    /* GLOBAL */
+    *{margin:0;padding:0;box-sizing:border-box;font-family: 'Roboto', sans-serif;}
+    body{background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color:#fff; transition:0.3s; position:relative; scroll-behavior:smooth;}
+    a{text-decoration:none;color:inherit;transition:0.3s;}
+    ul{list-style:none;}
+    h1,h2,h3,h4{font-family: 'Orbitron', sans-serif;}
+    .container{width:90%;max-width:1200px;margin:auto;position:relative;z-index:1;}
 
-    /* Header */
-    header { position: fixed; top:0; left:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:20px 10%; z-index:1000; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); transition: background 0.3s; }
-    header.scrolled { background: rgba(0,0,0,0.85); }
-    .logo { font-size:1.8rem; color:#ffcc00; font-weight:700; letter-spacing:1px; }
-    nav { display:flex; gap:30px; }
-    nav a { color:#fff; font-weight:500; position:relative; }
-    nav a.active::after { content:""; position:absolute; bottom:-5px; left:0; width:100%; height:2px; background:#ffcc00; border-radius:2px; }
-    .icon { display:flex; gap:15px; }
-    .icon a { color:#fff; font-size:1.2rem; }
-    .fa-bars { display:none; cursor:pointer; }
+    /* HEADER */
+    header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 10%;z-index:1000;background: rgba(0,0,0,0.6);backdrop-filter: blur(10px);transition:0.3s;}
+    header.scrolled{background: rgba(0,0,0,0.85);}
+    .logo{font-size:1.8rem;color:#ffcc00;font-weight:700;letter-spacing:1px;}
+    nav{display:flex;gap:30px;}
+    nav a{color:#fff;font-weight:500;position:relative;}
+    nav a.active::after{content:"";position:absolute;bottom:-5px;left:0;width:100%;height:2px;background:#ffcc00;border-radius:2px;}
+    .icon{display:flex;gap:15px;}
+    .icon a{color:#fff;font-size:1.2rem;}
+    .fa-bars{display:none;cursor:pointer;}
 
-    /* Home Section */
-    #home { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background: linear-gradient(135deg, #1f1c2c, #928dab); }
-    #home h1 { font-size:2.5rem; margin:15px 0; background: linear-gradient(90deg,#ffcc00,#ff0080); -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation: glow 2s infinite alternate; }
-    #home h4 { font-size:1.2rem; color:#ccc; letter-spacing:1px; }
-    #home p { margin:20px 0; font-size:1rem; color:#eee; }
-    .button a { display:inline-block; margin:10px; padding:12px 25px; border-radius:25px; border:2px solid #ffcc00; color:#ffcc00; font-weight:500; transition:0.3s; }
-    .button a:hover { background:#ffcc00; color:#000; }
+    /* TOP-RIGHT FLOATING ICONS */
+    .float-icons{position:fixed;top:50%;right:20px;display:flex;flex-direction:column;gap:20px;z-index:999;}
+    .float-icons a{color:#fff;background:rgba(255,255,255,0.1);padding:12px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:1.2rem;transition:0.3s;}
+    .float-icons a:hover{background:#ffcc00;color:#000;transform:scale(1.2);}
 
-    /* Social Links */
-    .social { margin-top:20px; display:flex; gap:20px; justify-content:center; }
-    .social a { color:#fff; font-size:1.5rem; transition:0.3s; }
-    .social a:hover { color:#ffcc00; transform:scale(1.2); }
+    /* THEME TOGGLE BUTTON */
+    .theme-toggle{
+        position:fixed; top:20px; right:20px; z-index:1000;
+        background: rgba(255,255,255,0.1); padding:12px; border-radius:50%;
+        cursor:pointer; transition:0.3s; color:#fff; display:flex; justify-content:center; align-items:center;
+    }
+    .theme-toggle:hover{background:#ffcc00; color:#000; transform:scale(1.2);}
+    body.light-theme{background: linear-gradient(135deg, #f0f0f0, #dcdcdc, #bfbfbf); color:#000; transition:0.5s;}
+    body.light-theme header{background: rgba(255,255,255,0.7); color:#000;}
+    body.light-theme nav a.active::after{background:#ff0080;}
+    body.light-theme .col-md-4{background: rgba(0,0,0,0.05); color:#000;}
+    body.light-theme .project-btn{background:#ff0080; color:#fff;}
+    body.light-theme #contact form{background: rgba(0,0,0,0.05);}
+    body.light-theme footer{background:#ccc; color:#111;}
+    body.light-theme .float-icons a{background: rgba(0,0,0,0.1); color:#000;}
+    body.light-theme .modal-content{background:#fff; color:#000;}
 
-    /* Sections */
-    section { padding:100px 0; }
-    section h2 { text-align:center; margin-bottom:50px; font-size:2.2rem; color:#ffcc00; position:relative; }
-    section h2::after { content:""; display:block; width:60px; height:3px; background:#ffcc00; margin:10px auto 0; border-radius:2px; }
+    /* HOME */
+    #home{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background: linear-gradient(135deg, #1f1c2c, #928dab);}
+    #home h1{font-size:2.5rem;margin:15px 0;background: linear-gradient(90deg,#ffcc00,#ff0080);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation: glow 2s infinite alternate;}
+    #home h4{font-size:1.2rem;color:#ccc;letter-spacing:1px;}
+    #home p{margin:20px 0;font-size:1rem;color:#eee;}
+    .button a{display:inline-block;margin:10px;padding:12px 25px;border-radius:25px;border:2px solid #ffcc00;color:#ffcc00;font-weight:500;transition:0.3s;}
+    .button a:hover{background:#ffcc00;color:#000;}
 
-    /* About Section */
-    #about .row { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; }
-    #about .col-md-4 { background: rgba(255,255,255,0.05); padding:20px; border-radius:15px; flex:1 1 250px; text-align:center; transition:0.3s; }
-    #about .col-md-4:hover { background: rgba(255,255,255,0.15); transform:translateY(-10px); }
+    /* SOCIAL */
+    .social{margin-top:20px;display:flex;gap:20px;justify-content:center;}
+    .social a{color:#fff;font-size:1.5rem;transition:0.3s;}
+    .social a:hover{color:#ffcc00;transform:scale(1.2);}
 
-    /* Projects */
-    #projects .row { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; }
-    #projects .col-md-4 { background: rgba(255,255,255,0.05); padding:20px; border-radius:15px; flex:1 1 300px; transition:0.3s; }
-    #projects .col-md-4:hover { background: rgba(255,255,255,0.15); transform:scale(1.05); }
+    /* SECTIONS */
+    section{padding:100px 0;}
+    section h2{text-align:center;margin-bottom:50px;font-size:2.2rem;color:#ffcc00;position:relative;}
+    section h2::after{content:"";display:block;width:60px;height:3px;background:#ffcc00;margin:10px auto 0;border-radius:2px;}
 
-    /* Contact */
-    #contact form { display:flex; flex-direction:column; gap:15px; background: rgba(255,255,255,0.05); padding:30px; border-radius:15px; }
-    #contact form input, #contact form textarea { padding:12px; border:none; border-radius:8px; resize:none; background: rgba(255,255,255,0.1); color:#fff; }
-    #contact form button { padding:12px; border:none; border-radius:25px; background:#ffcc00; color:#000; font-weight:700; cursor:pointer; transition:0.3s; }
-    #contact form button:hover { background:#ff0080; color:#fff; }
+    /* ABOUT */
+    #about .row{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;}
+    #about .col-md-4{background: rgba(255,255,255,0.05);padding:20px;border-radius:15px;flex:1 1 250px;text-align:center;transition:0.3s;}
+    #about .col-md-4:hover{background: rgba(255,255,255,0.15); transform:translateY(-10px);}
 
-    /* Footer */
-    footer { padding:20px 0; background:#111; text-align:center; color:#888; }
+    /* PROJECTS */
+    #projects .row{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;}
+    #projects .col-md-4{background: rgba(255,255,255,0.05);padding:20px;border-radius:15px;flex:1 1 300px;transition:0.3s;position:relative;}
+    #projects .col-md-4:hover{background: rgba(255,255,255,0.15); transform:scale(1.05);}
+    .project-btn{margin-top:15px;padding:8px 15px;border:none;border-radius:20px;background:#ffcc00;color:#000;font-weight:700;cursor:pointer;transition:0.3s;}
+    .project-btn:hover{background:#ff0080;color:#fff;}
 
-    /* Animations */
-    @keyframes glow { 0% { text-shadow: 0 0 5px #ffcc00; } 100% { text-shadow: 0 0 20px #ffcc00, 0 0 30px #ff0080; } }
+    /* MODAL */
+    .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:9999;}
+    .modal-content{background:#111;padding:20px;border-radius:15px;width:90%;max-width:700px;position:relative;}
+    .modal-content img{width:100%;border-radius:10px;margin-bottom:15px;}
+    .modal-content h3{color:#ffcc00;margin-bottom:10px;}
+    .close-btn{position:absolute;top:15px;right:15px;font-size:1.5rem;color:#ffcc00;cursor:pointer;transition:0.3s;}
+    .close-btn:hover{color:#ff0080;}
 
-    /* Responsive */
-    @media(max-width:991px){ nav { display:none; position:absolute; top:70px; right:10%; flex-direction:column; background:rgba(0,0,0,0.85); border-radius:10px; padding:20px; width:200px; } nav.show { display:flex; } .fa-bars { display:block; } }
-    @media(max-width:768px){ #home h1 { font-size:2rem; } #home h4 { font-size:1rem; } section { padding:70px 0; } }
-    @media(max-width:480px){ #home p { font-size:0.9rem; } }
+    /* CONTACT */
+    #contact form{display:flex;flex-direction:column;gap:15px;background: rgba(255,255,255,0.05);padding:30px;border-radius:15px;}
+    #contact form input,#contact form textarea{padding:12px;border:none;border-radius:8px;resize:none;background: rgba(255,255,255,0.1);color:#fff;}
+    #contact form button{padding:12px;border:none;border-radius:25px;background:#ffcc00;color:#000;font-weight:700;cursor:pointer;transition:0.3s;}
+    #contact form button:hover{background:#ff0080;color:#fff;}
+
+    /* FOOTER */
+    footer{padding:20px 0;background:#111;text-align:center;color:#888;}
+
+    /* ANIMATIONS */
+    @keyframes glow{0%{text-shadow:0 0 5px #ffcc00;}100%{text-shadow:0 0 20px #ffcc00,0 0 30px #ff0080;}}
+
+    /* RESPONSIVE */
+    @media(max-width:991px){nav{display:none;position:absolute;top:70px;right:10%;flex-direction:column;background:rgba(0,0,0,0.85);border-radius:10px;padding:20px;width:200px;} nav.show{display:flex;} .fa-bars{display:block;}}
+    @media(max-width:768px){#home h1{font-size:2rem;}#home h4{font-size:1rem;} section{padding:70px 0;}}
+    @media(max-width:480px){#home p{font-size:0.9rem;}}
 </style>
 </head>
 <body>
@@ -90,7 +121,19 @@
     </div>
 </header>
 
-<!-- Home Section -->
+<!-- FLOATING ICONS -->
+<div class="float-icons">
+    <a href="#"><i class="fa-solid fa-heart"></i></a>
+    <a href="https://github.com/RethishDev"><i class="fa-brands fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/rethish-kumar-p-a-152a55326"><i class="fa-brands fa-linkedin"></i></a>
+</div>
+
+<!-- Theme toggle -->    
+<div class="theme-toggle" id="themeToggle">
+    <i class="fa-solid fa-moon"></i>
+</div>
+
+<!-- HOME -->
 <section id="home">
     <div class="content container">
         <h4>Hello, it's me</h4>
@@ -100,16 +143,10 @@
             <a href="#contact">Let's Talk</a>
             <a href="#projects">Portfolio</a>
         </div>
-        <div class="social">
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://github.com/RethishDev"><i class="fa-brands fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/rethish-kumar-p-a-152a55326"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        </div>
     </div>
 </section>
 
-<!-- About Section -->
+<!-- ABOUT -->
 <section id="about">
     <div class="container">
         <h2>About Me</h2>
@@ -138,41 +175,51 @@
     </div>
 </section>
 
-<!-- Projects Section -->
+<!-- PROJECTS -->
 <section id="projects">
     <div class="container">
         <h2>My Projects</h2>
         <div class="row">
             <div class="col-md-4">
                 <h4>Flower Mart Management System</h4>
-                <p>Technologies: Java Servlet, HTML, CSS, MySQL<br>
-                Features: Inventory, Customer, Order Management & Billing</p>
+                <p>Java Servlet, HTML, CSS, MySQL</p>
+                <button class="project-btn" data-title="Flower Mart Management System" data-desc="Comprehensive system for managing inventory, customers, orders & billing." data-img="https://via.placeholder.com/600x400">View Details</button>
             </div>
             <div class="col-md-4">
                 <h4>Dance School Management System</h4>
-                <p>Technologies: Java Servlets, JSP, HTML, CSS, JS, MySQL<br>
-                Features: Enrollment, Scheduling, Attendance, Fee Management</p>
+                <p>Java Servlets, JSP, HTML, CSS, JS, MySQL</p>
+                <button class="project-btn" data-title="Dance School Management System" data-desc="Manage enrollment, scheduling, attendance & fee tracking." data-img="https://via.placeholder.com/600x400">View Details</button>
             </div>
             <div class="col-md-4">
                 <h4>Criminal Investigation Tracker</h4>
-                <p>Technologies: Python, Django<br>
-                Features: Case Management, Data Analytics, Suspect Prediction</p>
+                <p>Python, Django</p>
+                <button class="project-btn" data-title="Criminal Investigation Tracker" data-desc="Case management, data analytics & suspect prediction using ML." data-img="https://via.placeholder.com/600x400">View Details</button>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Contact Section -->
+<!-- CONTACT -->
 <section id="contact">
     <div class="container">
         <h2>Contact Me</h2>
         <form>
-            <input type="email" placeholder="Your Email" value="rathishnote7@gmail.com" readonly>
-            <textarea placeholder="Your Mobile Number" rows="1" readonly>+91 8590360735</textarea>
+            <input type="email" value="rathishnote7@gmail.com" readonly>
+            <textarea rows="1" readonly>+91 8590360735</textarea>
             <button type="submit">Send Message</button>
         </form>
     </div>
 </section>
+
+<!-- MODAL -->
+<div class="modal" id="projectModal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <img src="" alt="Project Image" id="modal-img">
+        <h3 id="modal-title"></h3>
+        <p id="modal-desc"></p>
+    </div>
+</div>
 
 <footer>
     <p>&copy; 2024 Rethish Kumar P A. All Rights Reserved.</p>
@@ -197,8 +244,6 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.remove('active');
             if(link.getAttribute('href').includes(current)) link.classList.add('active');
         });
-
-        // Header scroll effect
         if(window.scrollY > 50) header.classList.add('scrolled');
         else header.classList.remove('scrolled');
     });
@@ -206,12 +251,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile menu toggle
     menuIcon.addEventListener('click', () => nav.classList.toggle('show'));
 
-    // Prevent form submission
+    // Form submission alert
     const form = document.querySelector('form');
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        alert("Thanks for reaching out! I'll get back to you soon.");
+    form.addEventListener('submit', e => { e.preventDefault(); alert("Thanks! I'll get back to you soon."); });
+
+    // THEME TOGGLE LOGIC
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-theme');
+        const icon = themeToggle.querySelector('i');
+        if(document.body.classList.contains('light-theme')){
+            icon.classList.replace('fa-moon','fa-sun');
+        } else {
+            icon.classList.replace('fa-sun','fa-moon');
+        }
     });
+
+    // Project modal logic
+    const modal = document.getElementById('projectModal');
+    const modalImg = document.getElementById('modal-img');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const closeBtn = document.querySelector('.close-btn');
+    document.querySelectorAll('.project-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            modalImg.src = btn.getAttribute('data-img');
+            modalTitle.textContent = btn.getAttribute('data-title');
+            modalDesc.textContent = btn.getAttribute('data-desc');
+        });
+    });
+    closeBtn.addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', e => { if(e.target == modal) modal.style.display='none'; });
 });
 </script>
 
