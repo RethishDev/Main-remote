@@ -9,6 +9,21 @@
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<style>
+		nav.show {
+		  display: block;
+		}
+		
+		nav a.active {
+		  color: #ffcc00;
+		  font-weight: bold;
+		}
+		
+		header.scrolled {
+		  background-color: rgba(0, 0, 0, 0.8);
+		  transition: background-color 0.3s ease;
+		}
+	</style>
 </head>
 <body style="min-height: 100vh;background: #4a4a4a;background-size: cover;background-position: center;">
 
@@ -131,8 +146,74 @@
 	</footer>
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
+    <script>
+		// Wait for the DOM to fully load
+		document.addEventListener('DOMContentLoaded', () => {
+		    // Smooth scroll for navigation links
+		    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+		    navLinks.forEach(link => {
+		        link.addEventListener('click', e => {
+		            e.preventDefault();
+		            const target = document.querySelector(link.getAttribute('href'));
+		            if (target) {
+		                window.scrollTo({
+		                    top: target.offsetTop - 60,
+		                    behavior: 'smooth'
+		                });
+		            }
+		        });
+		    });
+		
+		    // Navbar active link on scroll
+		    const sections = document.querySelectorAll('section');
+		    const navItems = document.querySelectorAll('nav a');
+		    window.addEventListener('scroll', () => {
+		        let current = '';
+		        sections.forEach(section => {
+		            const sectionTop = section.offsetTop;
+		            const sectionHeight = section.clientHeight;
+		            if (pageYOffset >= sectionTop - sectionHeight / 3) {
+		                current = section.getAttribute('id');
+		            }
+		        });
+		        navItems.forEach(link => {
+		            link.classList.remove('active');
+		            if (link.getAttribute('href').includes(current)) {
+		                link.classList.add('active');
+		            }
+		        });
+		    });
+		
+		    // Toggle menu for mobile (hamburger icon)
+		    const menuIcon = document.querySelector('.fa-bars');
+		    const navMenu = document.querySelector('nav');
+		
+		    menuIcon.addEventListener('click', () => {
+		        navMenu.classList.toggle('show');
+		    });
+		
+		    // Simple animation for header appearance
+		    const header = document.querySelector('header');
+		    window.addEventListener('scroll', () => {
+		        if (window.scrollY > 50) {
+		            header.classList.add('scrolled');
+		        } else {
+		            header.classList.remove('scrolled');
+		        }
+		    });
+		
+		    // Optional: Prevent form submission default behavior (since it's a static portfolio)
+		    const contactForm = document.querySelector('form');
+		    if (contactForm) {
+		        contactForm.addEventListener('submit', e => {
+		            e.preventDefault();
+		            alert('Thanks for reaching out! I’ll get back to you soon.');
+		        });
+		    }
+		});
+	</script>
 		
 </body>
 </html>
+
 
