@@ -1,218 +1,219 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>MyPortfolio-Home</title>
-	<link rel="stylesheet" href="css/styles.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-	<style>
-		nav.show {
-		  display: block;
-		}
-		
-		nav a.active {
-		  color: #ffcc00;
-		  font-weight: bold;
-		}
-		
-		header.scrolled {
-		  background-color: rgba(0, 0, 0, 0.8);
-		  transition: background-color 0.3s ease;
-		}
-	</style>
+<title>Rethish Kumar P A | Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+    /* Global Styles */
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; }
+    body { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: #fff; }
+    a { text-decoration:none; color: inherit; transition: 0.3s; }
+    ul { list-style:none; }
+    h1, h2, h3, h4 { font-family: 'Orbitron', sans-serif; }
+    .container { width:90%; max-width:1200px; margin:auto; }
+
+    /* Header */
+    header { position: fixed; top:0; left:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:20px 10%; z-index:1000; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); transition: background 0.3s; }
+    header.scrolled { background: rgba(0,0,0,0.85); }
+    .logo { font-size:1.8rem; color:#ffcc00; font-weight:700; letter-spacing:1px; }
+    nav { display:flex; gap:30px; }
+    nav a { color:#fff; font-weight:500; position:relative; }
+    nav a.active::after { content:""; position:absolute; bottom:-5px; left:0; width:100%; height:2px; background:#ffcc00; border-radius:2px; }
+    .icon { display:flex; gap:15px; }
+    .icon a { color:#fff; font-size:1.2rem; }
+    .fa-bars { display:none; cursor:pointer; }
+
+    /* Home Section */
+    #home { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background: linear-gradient(135deg, #1f1c2c, #928dab); }
+    #home h1 { font-size:2.5rem; margin:15px 0; background: linear-gradient(90deg,#ffcc00,#ff0080); -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation: glow 2s infinite alternate; }
+    #home h4 { font-size:1.2rem; color:#ccc; letter-spacing:1px; }
+    #home p { margin:20px 0; font-size:1rem; color:#eee; }
+    .button a { display:inline-block; margin:10px; padding:12px 25px; border-radius:25px; border:2px solid #ffcc00; color:#ffcc00; font-weight:500; transition:0.3s; }
+    .button a:hover { background:#ffcc00; color:#000; }
+
+    /* Social Links */
+    .social { margin-top:20px; display:flex; gap:20px; justify-content:center; }
+    .social a { color:#fff; font-size:1.5rem; transition:0.3s; }
+    .social a:hover { color:#ffcc00; transform:scale(1.2); }
+
+    /* Sections */
+    section { padding:100px 0; }
+    section h2 { text-align:center; margin-bottom:50px; font-size:2.2rem; color:#ffcc00; position:relative; }
+    section h2::after { content:""; display:block; width:60px; height:3px; background:#ffcc00; margin:10px auto 0; border-radius:2px; }
+
+    /* About Section */
+    #about .row { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; }
+    #about .col-md-4 { background: rgba(255,255,255,0.05); padding:20px; border-radius:15px; flex:1 1 250px; text-align:center; transition:0.3s; }
+    #about .col-md-4:hover { background: rgba(255,255,255,0.15); transform:translateY(-10px); }
+
+    /* Projects */
+    #projects .row { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; }
+    #projects .col-md-4 { background: rgba(255,255,255,0.05); padding:20px; border-radius:15px; flex:1 1 300px; transition:0.3s; }
+    #projects .col-md-4:hover { background: rgba(255,255,255,0.15); transform:scale(1.05); }
+
+    /* Contact */
+    #contact form { display:flex; flex-direction:column; gap:15px; background: rgba(255,255,255,0.05); padding:30px; border-radius:15px; }
+    #contact form input, #contact form textarea { padding:12px; border:none; border-radius:8px; resize:none; background: rgba(255,255,255,0.1); color:#fff; }
+    #contact form button { padding:12px; border:none; border-radius:25px; background:#ffcc00; color:#000; font-weight:700; cursor:pointer; transition:0.3s; }
+    #contact form button:hover { background:#ff0080; color:#fff; }
+
+    /* Footer */
+    footer { padding:20px 0; background:#111; text-align:center; color:#888; }
+
+    /* Animations */
+    @keyframes glow { 0% { text-shadow: 0 0 5px #ffcc00; } 100% { text-shadow: 0 0 20px #ffcc00, 0 0 30px #ff0080; } }
+
+    /* Responsive */
+    @media(max-width:991px){ nav { display:none; position:absolute; top:70px; right:10%; flex-direction:column; background:rgba(0,0,0,0.85); border-radius:10px; padding:20px; width:200px; } nav.show { display:flex; } .fa-bars { display:block; } }
+    @media(max-width:768px){ #home h1 { font-size:2rem; } #home h4 { font-size:1rem; } section { padding:70px 0; } }
+    @media(max-width:480px){ #home p { font-size:0.9rem; } }
+</style>
 </head>
-<body style="min-height: 100vh;background: #4a4a4a;background-size: cover;background-position: center;">
+<body>
 
-	<header>
+<header>
+    <h1 class="logo">Rethish..</h1>
+    <nav>
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="icon">
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="#"><i class="fa-solid fa-heart"></i></a>
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</header>
 
-		<!-- Navigation -->
-		<h1 class="logo">Rethish..</h1>
-		<nav>
-			<a href="#home">home</a> 
-			<a href="#about">about</a> 
-			<a href="#projects">projects</a> 
-			<a href="#contact">contact</a>
-		</nav>
-		<div class="icon">
-			<a href="#"><i class="fa-solid fa-cart-shopping"></i></a> 
-			<a href="#"><i class="fa-solid fa-heart"></i></a> 
-			<a href="#"><i class="fa-solid fa-bars"></i></a>
-		</div>
+<!-- Home Section -->
+<section id="home">
+    <div class="content container">
+        <h4>Hello, it's me</h4>
+        <h1>Rethish Kumar P A</h1>
+        <p>Java Spring Boot Developer | Web Developer | Problem Solver</p>
+        <div class="button">
+            <a href="#contact">Let's Talk</a>
+            <a href="#projects">Portfolio</a>
+        </div>
+        <div class="social">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://github.com/RethishDev"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/rethish-kumar-p-a-152a55326"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </div>
+</section>
 
-	</header>
-		
-	<!-- Home Section -->
-	<section id="home" class="Home">
-		<div class="content">
-			<h4>Hello, it's me</h4>
-			<h1><span>Rethish Kumar P A</span> <br> Java Spring boot developer</h1>
-			<p>Explore My Work<br> Get to know more about my journey, projects, and skills.</p>
-			<div class="button">
-				<a href="#" class="btn1">let's talk</a> <a href="#" class="btn2">portfolio</a>
-			</div>
-		</div>
-		<div class="social">
-			<a href="#"><i class="fa-brands fa-facebook"></i></a> 
-			<a href="https://github.com/RethishDev"><i class="fa-brands fa-github"></i></a> 
-			<a href="https://www.linkedin.com/in/rethish-kumar-p-a-152a55326"><i class="fa-brands fa-linkedin"></i></a> 
-			<a href="#"><i class="fa-brands fa-instagram"></i></a>
-		</div>
-	</section>
-	
-	<!-- About Section -->
-	<section id="about" class="About">
-		<div class="content">
-			<h2 class="text-center">About Me</h2>
-        <p class="text-center">Hi, I'm <strong>Rethish Kumar P A</strong>
-        , a passionate developer with expertise in Java, Spring Boot, and web development. 
-        I love creating dynamic, user-friendly applications that solve real-world problems.</p>
-        <div class="row text-center mt-4">
+<!-- About Section -->
+<section id="about">
+    <div class="container">
+        <h2>About Me</h2>
+        <div class="row">
             <div class="col-md-4">
                 <h3>Skills</h3>
                 <ul>
                     <li>Java</li>
-					<li>Hibernate</li>
                     <li>Spring Boot</li>
+                    <li>Hibernate</li>
                     <li>JSP & Servlets</li>
-                    <li>HTML/CSS/JavaScript</li>
+                    <li>HTML/CSS/JS</li>
                     <li>MySQL</li>
                 </ul>
             </div>
-            <br>
             <div class="col-md-4">
                 <h3>Experience</h3>
-				<p>Java Software Engineer at unimoni india a wizz financial group</P>
-                <p>Worked on projects like Flower Mart Management System, ChoreoTrack, and Digital Wallet Application.</p>
+                <p>Java Software Engineer at Unimoni India, a Wizz Financial Group</p>
+                <p>Projects: Flower Mart Management System, ChoreoTrack, Digital Wallet Application</p>
             </div>
             <div class="col-md-4">
                 <h3>Hobbies</h3>
-                <p>Learning new technologies, problem-solving, and exploring creative ideas.</p>
+                <p>Learning new technologies, solving problems, and exploring creative ideas</p>
             </div>
         </div>
-		</div>
-	</section> 
+    </div>
+</section>
 
-	
-	<!-- Projects Section -->
-    <section id="projects" class="Projects">
-    <br>
-        <div class="content">
-            <h2>My Projects</h2>
-            <br>
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <h4>Flower Mart Management System</h4>
-                    <p>Technologies: Java Servlet, HTML, CSS, MySQL<br>
-					Description:  It is a comprehensive system to streamline the management of a flower mart.<br> 
-					Features include: Inventory management, Customer management, Order management and Bill generation.</p>
-                </div>
-                <div class="col-md-4">
-                    <h4>Dance School Management System</h4>
-                    <p>Technologies: Java Servlets, JSP, HTML, CSS, JavaScript, MySQL<br>
-					Description:  It is a web-based management system to handle the operations of a dance school, including:
-					 Student enrollment, scheduling, Attendance, performance tracking and Fee management.</p>
-                </div>
-                <div class="col-md-4">
-                    <h4>Criminal Investigation Tracker with suspect prediction</h4>
-                    <p>Technical Requirements: Python and Django Framework.<br>
-					Description: The proposed system appears to be a comprehensive platform aimed at enhancing the efficiency and effectiveness of law enforcement agencies in managing and solving criminal cases.<br>
-					Features: Centralized case management, Advanced data analytics, Machine learning-based suspect prediction.</p>
-                </div>
+<!-- Projects Section -->
+<section id="projects">
+    <div class="container">
+        <h2>My Projects</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Flower Mart Management System</h4>
+                <p>Technologies: Java Servlet, HTML, CSS, MySQL<br>
+                Features: Inventory, Customer, Order Management & Billing</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Dance School Management System</h4>
+                <p>Technologies: Java Servlets, JSP, HTML, CSS, JS, MySQL<br>
+                Features: Enrollment, Scheduling, Attendance, Fee Management</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Criminal Investigation Tracker</h4>
+                <p>Technologies: Python, Django<br>
+                Features: Case Management, Data Analytics, Suspect Prediction</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="Contact">
-    <br><br>
-        <h2 class="text-center">Contact Me</h2>
-        <form class="mt-4 mx-auto" style="max-width: 600px;">
-            <div class="content">
-                <h4>Email</h4>
-                <p>rathishnote7@gmail.com</p>
-            </div>
-                <h4>Mob no</h4>
-                <textarea>+91 8590360735</textarea>
-            <button type="submit" class="button">Send Message</button>
+<!-- Contact Section -->
+<section id="contact">
+    <div class="container">
+        <h2>Contact Me</h2>
+        <form>
+            <input type="email" placeholder="Your Email" value="rathishnote7@gmail.com" readonly>
+            <textarea placeholder="Your Mobile Number" rows="1" readonly>+91 8590360735</textarea>
+            <button type="submit">Send Message</button>
         </form>
-    </section>
+    </div>
+</section>
 
-	<footer class="bg-dark text-white text-center py-3">
-		<p>&copy; 2024 Rethish Kumar P A. All Rights Reserved.</p>
-	</footer>
-	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-		// Wait for the DOM to fully load
-		document.addEventListener('DOMContentLoaded', () => {
-		    // Smooth scroll for navigation links
-		    const navLinks = document.querySelectorAll('nav a[href^="#"]');
-		    navLinks.forEach(link => {
-		        link.addEventListener('click', e => {
-		            e.preventDefault();
-		            const target = document.querySelector(link.getAttribute('href'));
-		            if (target) {
-		                window.scrollTo({
-		                    top: target.offsetTop - 60,
-		                    behavior: 'smooth'
-		                });
-		            }
-		        });
-		    });
-		
-		    // Navbar active link on scroll
-		    const sections = document.querySelectorAll('section');
-		    const navItems = document.querySelectorAll('nav a');
-		    window.addEventListener('scroll', () => {
-		        let current = '';
-		        sections.forEach(section => {
-		            const sectionTop = section.offsetTop;
-		            const sectionHeight = section.clientHeight;
-		            if (pageYOffset >= sectionTop - sectionHeight / 3) {
-		                current = section.getAttribute('id');
-		            }
-		        });
-		        navItems.forEach(link => {
-		            link.classList.remove('active');
-		            if (link.getAttribute('href').includes(current)) {
-		                link.classList.add('active');
-		            }
-		        });
-		    });
-		
-		    // Toggle menu for mobile (hamburger icon)
-		    const menuIcon = document.querySelector('.fa-bars');
-		    const navMenu = document.querySelector('nav');
-		
-		    menuIcon.addEventListener('click', () => {
-		        navMenu.classList.toggle('show');
-		    });
-		
-		    // Simple animation for header appearance
-		    const header = document.querySelector('header');
-		    window.addEventListener('scroll', () => {
-		        if (window.scrollY > 50) {
-		            header.classList.add('scrolled');
-		        } else {
-		            header.classList.remove('scrolled');
-		        }
-		    });
-		
-		    // Optional: Prevent form submission default behavior (since it's a static portfolio)
-		    const contactForm = document.querySelector('form');
-		    if (contactForm) {
-		        contactForm.addEventListener('submit', e => {
-		            e.preventDefault();
-		            alert('Thanks for reaching out! I’ll get back to you soon.');
-		        });
-		    }
-		});
-	</script>
-		
+<footer>
+    <p>&copy; 2024 Rethish Kumar P A. All Rights Reserved.</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('section');
+    const header = document.querySelector('header');
+    const menuIcon = document.querySelector('.fa-bars');
+    const nav = document.querySelector('nav');
+
+    // Smooth scroll & active link
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 70;
+            if(pageYOffset >= sectionTop) current = section.getAttribute('id');
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('href').includes(current)) link.classList.add('active');
+        });
+
+        // Header scroll effect
+        if(window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+    });
+
+    // Mobile menu toggle
+    menuIcon.addEventListener('click', () => nav.classList.toggle('show'));
+
+    // Prevent form submission
+    const form = document.querySelector('form');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        alert("Thanks for reaching out! I'll get back to you soon.");
+    });
+});
+</script>
+
 </body>
 </html>
-
