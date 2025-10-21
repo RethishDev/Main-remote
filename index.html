@@ -37,6 +37,12 @@
         background: rgba(255,255,255,0.1); padding:12px; border-radius:50%;
         cursor:pointer; transition:0.3s; color:#fff; display:flex; justify-content:center; align-items:center;
     }
+    /* Mobile view override */
+    @media (max-width: 768px) {
+        .theme-toggle {
+            top: 89px;
+        }
+    }
     .theme-toggle:hover{background:#ffcc00; color:#000; transform:scale(1.2);}
     body.light-theme{background: linear-gradient(135deg, #f0f0f0, #dcdcdc, #bfbfbf); color:#000; transition:0.5s;}
     body.light-theme header{background: rgba(255,255,255,0.7); color:#000;}
