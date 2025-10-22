@@ -6,6 +6,7 @@
 <title>Rethish Kumar P A | Portfolio</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
     /* GLOBAL */
     *{margin:0;padding:0;box-sizing:border-box;font-family: 'Roboto', sans-serif;}
@@ -174,9 +175,7 @@
             <div class="col-md-4">
                 <h3>Experience</h3>
                 <p>Java Software Engineer at Unimoni India - A Wizz Financial Group</p>
-                <p>Project: CRMS - Customer Relationship Management Syste</p>
-                <p>Developed and maintained Spring Boot REST API's, Jsp based modules for CRMS and DB Operations.</p>
-                <p>Containerized applications using Docker microservices for consistent environement and smooth deployment. Designed and implemented three RESTful Spring Boot microservices: SMS, EMAIL and WHATHSAPP Service. Tested End-points using Postman, ensuring reliable system communication.</p>
+                <p>Project: CRMS - Customer Relationship Management System. Developed and maintained Spring Boot REST API's, Jsp based modules for CRMS and DB Operations. Containerized applications using Docker microservices for consistent environement and smooth deployment. Designed and implemented three RESTful Spring Boot microservices: SMS, EMAIL and WHATHSAPP Service. Tested End-points using Postman, ensuring reliable system communication.</p>
             </div>
             <div class="col-md-4">
                 <h3>Hobbies</h3>
@@ -272,6 +271,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Form submission alert
     const form = document.querySelector('form');
     form.addEventListener('submit', e => { e.preventDefault(); alert("Thanks! I'll get back to you soon."); });
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      Swal.fire({
+        title: '🎉 Thank You!',
+        text: "Your message has been received. I'll get back to you soon 💌 (**DEMO)",
+        icon: 'success',
+        confirmButtonText: 'Okay 😊',
+        confirmButtonColor: '#6c63ff',
+        allowOutsideClick: false,
+        backdrop: `rgba(0,0,0,0.4)`
+      });
+    });
+
 
     // THEME TOGGLE LOGIC
     const themeToggle = document.getElementById('themeToggle');
