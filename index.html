@@ -80,16 +80,19 @@
 
     /* PROJECTS */
     #projects .row{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;}
-    #projects .col-md-4{background: rgba(255,255,255,0.05);padding:20px;border-radius:15px;flex:1 1 300px;transition:0.3s;position:relative;}
+    #projects .col-md-4{background: rgba(255,255,255,0.05);padding:20px;border-radius:15px;flex:1 1 300px;transition:0.3s;position:relative;display:flex;flex-direction:column;}
+    #projects .col-md-4 p {flex-grow:1; margin:15px 0;}
     #projects .col-md-4:hover{background: rgba(255,255,255,0.15); transform:scale(1.05);}
-    .project-btn{margin-top:15px;padding:8px 15px;border:none;border-radius:20px;background:#ffcc00;color:#000;font-weight:700;cursor:pointer;transition:0.3s;}
+    .project-btn{margin-top:auto;padding:10px 15px;border:none;border-radius:20px;background:#ffcc00;color:#000;font-weight:700;cursor:pointer;transition:0.3s;}
     .project-btn:hover{background:#ff0080;color:#fff;}
 
     /* MODAL */
     .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:9999;}
-    .modal-content{background:#111;padding:20px;border-radius:15px;width:90%;max-width:700px;position:relative;}
+    .modal-content{background:#111;padding:30px;border-radius:15px;width:90%;max-width:700px;position:relative;max-height:90vh;overflow-y:auto;}
     .modal-content img{width:100%;border-radius:10px;margin-bottom:15px;}
-    .modal-content h3{color:#ffcc00;margin-bottom:10px;}
+    .modal-content h3{color:#ffcc00;margin-bottom:15px;}
+    .modal-content p, .modal-content ul {margin-bottom:10px; line-height: 1.6;}
+    .modal-content ul {padding-left: 20px; list-style: disc;}
     .close-btn{position:absolute;top:15px;right:15px;font-size:1.5rem;color:#ffcc00;cursor:pointer;transition:0.3s;}
     .close-btn:hover{color:#ff0080;}
 
@@ -190,35 +193,45 @@
     <div class="container">
         <h2>My Projects</h2>
         <div class="row">
-            <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm p-3">
-            <h4 class="card-title">Uni-Messenger</h4>
-            <p class="card-text text-muted mb-4">Java, Spring Boot, REST APIs, JWT, Postman</p>
-            <button class="btn btn-primary project-btn mt-auto" 
-                data-title="Uni-Messenger (Centralized Communication Platform)" 
-                data-desc="<p>Client applications often suffer from duplicated code when implementing their own notification systems. To solve this, I independently designed and developed Uni-Messenger, a centralized RESTful platform at Unimoni that acts as a single source of truth for all outgoing communications (SMS, WhatsApp, and Email).</p><strong>Key Contributions:</strong><ul><li><strong>Architecture & APIs:</strong> Architected the REST APIs from scratch to route messages to the appropriate communication channels.</li><li><strong>Security:</strong> Implemented JWT authentication to ensure only authorized client applications could invoke the messaging services.</li><li><strong>Integration & Reliability:</strong> Integrated external messaging provider APIs, handled complex validation rules, and built global exception handling to guarantee reliable message delivery.</li></ul>" 
-                data-img="https://via.placeholder.com/600x400">
-                View Details
-            </button>
-        </div>
-    </div>
+            <!-- Project 1 -->
             <div class="col-md-4">
-                <h4>Swapkart Application</h4>
-                <p>Java Spring Boot, Thymeleaf, HTML, CSS, JS and PostgreSQL</p>
-                <button class="project-btn" data-title="Swapkart Application" data-desc="Swapkart is an innovative, web-based platform built using Java Spring Boot and PostgreSQL, designed to facilitate the swap (exchange), sale, and donation of pre-owned goods. The project aims to promote reuse and reduce waste by enabling individuals to easily give away, trade, or sell items they no longer need. Through features such as JWT-based authentication, role-based access control, location-based search, user ratings and reviews, and admin moderation, the platform ensures a safe, transparent, and trustworthy environment for all users. SwapKart’s goal is to encourage eco-conscious behavior and foster a community-driven culture of responsible consumption by integrating multiple transaction types - sell, swap, and  donate - within a single, efficient system." data-img="https://raw.githubusercontent.com/RethishDev/swapkart-assets/main/swapkart-logo.png">
+                <h4>Uni-Messenger</h4>
+                <p>Java, Spring Boot, REST APIs, JWT, Postman</p>
+                <button class="project-btn" 
+                    data-title="Uni-Messenger (Centralized Communication Platform)" 
+                    data-desc="<p>Client applications often suffer from duplicated code when implementing their own notification systems. To solve this, I independently designed and developed Uni-Messenger, a centralized RESTful platform at Unimoni that acts as a single source of truth for all outgoing communications (SMS, WhatsApp, and Email).</p><strong>Key Contributions:</strong><ul><li><strong>Architecture & APIs:</strong> Architected the REST APIs from scratch to route messages to the appropriate communication channels.</li><li><strong>Security:</strong> Implemented JWT authentication to ensure only authorized client applications could invoke the messaging services.</li><li><strong>Integration & Reliability:</strong> Integrated external messaging provider APIs, handled complex validation rules, and built global exception handling to guarantee reliable message delivery.</li></ul>" 
+                    data-img="https://via.placeholder.com/600x400">
                     View Details
                 </button>
             </div>
+
+            <!-- Project 2 -->
+            <div class="col-md-4">
+                <h4>Swapkart Application</h4>
+                <p>Java Spring Boot, Thymeleaf, HTML, CSS, JS and PostgreSQL</p>
+                <button class="project-btn" 
+                    data-title="Swapkart Application" 
+                    data-desc="<p>Swapkart is an innovative, web-based platform built using Java Spring Boot and PostgreSQL, designed to facilitate the swap (exchange), sale, and donation of pre-owned goods. The project aims to promote reuse and reduce waste by enabling individuals to easily give away, trade, or sell items they no longer need.</p><p>Through features such as JWT-based authentication, role-based access control, location-based search, user ratings and reviews, and admin moderation, the platform ensures a safe, transparent, and trustworthy environment for all users. SwapKart’s goal is to encourage eco-conscious behavior and foster a community-driven culture of responsible consumption by integrating multiple transaction types - sell, swap, and donate - within a single, efficient system.</p>" 
+                    data-img="https://raw.githubusercontent.com/RethishDev/swapkart-assets/main/swapkart-logo.png">
+                    View Details
+                </button>
+            </div>
+
+            <!-- Project 3 -->
             <div class="col-md-4">
                 <h4>Flower Mart Management System</h4>
                 <p>Java Servlet, HTML, CSS, MySQL</p>
                 <button class="project-btn" data-title="Flower Mart Management System" data-desc="Comprehensive system for managing inventory, customers, orders & billing." data-img="https://via.placeholder.com/600x400">View Details</button>
             </div>
+
+            <!-- Project 4 -->
             <div class="col-md-4">
                 <h4>Dance School Management System</h4>
                 <p>Java Servlets, JSP, HTML, CSS, JS, MySQL</p>
                 <button class="project-btn" data-title="Dance School Management System" data-desc="Manage enrollment, scheduling, attendance & fee tracking." data-img="https://via.placeholder.com/600x400">View Details</button>
             </div>
+
+            <!-- Project 5 -->
             <div class="col-md-4">
                 <h4>Criminal Investigation Tracker</h4>
                 <p>Python, Django</p>
@@ -246,12 +259,12 @@
         <span class="close-btn">&times;</span>
         <img src="" alt="Project Image" id="modal-img">
         <h3 id="modal-title"></h3>
-        <p id="modal-desc"></p>
+        <div id="modal-desc"></div> <!-- Changed to a div instead of a p tag -->
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2024 Rethish Kumar P A. All Rights Reserved.</p>
+    <p>&copy; 2026 Rethish Kumar P A. All Rights Reserved.</p>
 </footer>
 
 <script>
@@ -314,14 +327,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalTitle = document.getElementById('modal-title');
     const modalDesc = document.getElementById('modal-desc');
     const closeBtn = document.querySelector('.close-btn');
+    
     document.querySelectorAll('.project-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             modal.style.display = 'flex';
             modalImg.src = btn.getAttribute('data-img');
             modalTitle.textContent = btn.getAttribute('data-title');
-            modalDesc.textContent = btn.getAttribute('data-desc');
+            
+            // KEY FIX: Changed from textContent to innerHTML so the HTML tags render correctly
+            modalDesc.innerHTML = btn.getAttribute('data-desc'); 
         });
     });
+    
     closeBtn.addEventListener('click', () => modal.style.display = 'none');
     window.addEventListener('click', e => { if(e.target == modal) modal.style.display='none'; });
 });
