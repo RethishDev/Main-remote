@@ -210,7 +210,7 @@
                 <h4>Swapkart Application</h4>
                 <p>Java Spring Boot, Thymeleaf, HTML, CSS, JS and PostgreSQL</p>
                 <button class="project-btn" 
-                    data-title="&lt;a href='https://swapkart-f1k7.onrender.com' target='_blank'&gt;Swapkart Application&lt;/a&gt;" 
+                    data-title="<a href='https://swapkart-f1k7.onrender.com' target='_blank'>Swapkart Application</a>" 
                     data-desc="<p>Swapkart is an innovative, web-based platform built using Java Spring Boot and PostgreSQL, designed to facilitate the swap (exchange), sale, and donation of pre-owned goods. The project aims to promote reuse and reduce waste by enabling individuals to easily give away, trade, or sell items they no longer need.</p><p>Through features such as JWT-based authentication, role-based access control, location-based search, user ratings and reviews, and admin moderation, the platform ensures a safe, transparent, and trustworthy environment for all users. SwapKart’s goal is to encourage eco-conscious behavior and foster a community-driven culture of responsible consumption by integrating multiple transaction types - sell, swap, and donate - within a single, efficient system.</p>" 
                     data-img="https://raw.githubusercontent.com/RethishDev/swapkart-assets/main/swapkart-logo.png">
                     View Details
@@ -332,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             modal.style.display = 'flex';
             modalImg.src = btn.getAttribute('data-img');
-            modalTitle.textContent = btn.getAttribute('data-title');
+            modalTitle.innerHTML = btn.getAttribute('data-title');
             
             // KEY FIX: Changed from textContent to innerHTML so the HTML tags render correctly
             modalDesc.innerHTML = btn.getAttribute('data-desc'); 
